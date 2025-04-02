@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorateur de Fichiers Tkinter - Projet Final</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-bottom: 50px;
+        }
+        
+        .navbar {
+            background-color: var(--secondary-color) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 40px;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .app-screenshot {
+            border: 5px solid white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+        
+        .app-screenshot:hover {
+            transform: scale(1.02);
+        }
+        
+        .feature-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            background-color: white;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .team-member {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 15px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin: 0 auto 15px;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .theme-preview {
+            width: 100%;
+            height: 100px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .theme-preview:hover {
+            transform: scale(1.05);
+        }
+        
+        .theme-preview.active {
+            border-color: var(--accent-color);
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .tech-stack img {
+            height: 40px;
+            margin: 0 10px;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+        
+        .tech-stack img:hover {
+            filter: grayscale(0%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Explorateur Tkinter</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Fonctionnalités</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#themes">Thèmes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#team">Équipe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#demos">Démonstrations</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Explorateur de Fichiers Tkinter</h1>
+                    <p class="lead mb-4">Une application Python moderne avec interface personnalisable pour une gestion optimale de vos fichiers</p>
+                    <div class="d-flex gap-3">
+                        <a href="#demos" class="btn btn-light btn-lg">Voir les démos</a>
+                        <a href="#features" class="btn btn-outline-light btn-lg">Fonctionnalités</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="app-screenshot.png" alt="Capture d'écran de l'application" class="app-screenshot mt-4 mt-lg-0">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Fonctionnalités Principales</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">📂</div>
+                        <h3>Navigation Avancée</h3>
+                        <p>Double-clic pour ouvrir les dossiers, barre de chemin cliquable, historique de navigation et boutons précédent/suivant.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Thèmes Personnalisables</h3>
+                        <p>Implémentation de 10 thèmes ttkbootstrap différents pour adapter l'interface à vos préférences.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Recherche & Filtres</h3>
+                        <p>Recherche instantanée avec filtre par type de fichier (images, documents, etc.).</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">⭐</div>
+                        <h3>Favoris</h3>
+                        <p>Marquez vos dossiers et fichiers importants pour y accéder rapidement depuis le panneau latéral.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">🛠️</div>
+                        <h3>Actions Contextuelles</h3>
+                        <p>Menu clic droit avec options : ouvrir, renommer, supprimer, copier, créer un nouveau dossier.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">ℹ️</div>
+                        <h3>Informations Détaillées</h3>
+                        <p>Affiche la taille, date de création/modification et autres métadonnées des fichiers sélectionnés.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Themes Section -->
+    <section id="themes" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Thèmes Disponibles</h2>
+            <p class="text-center mb-5">Notre explorateur implémente plusieurs thèmes ttkbootstrap pour personnaliser l'apparence</p>
+            
+            <div class="row g-4">
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="theme-preview bg-primary active" data-theme="primary" onclick="changeTheme('primary')"></div>
+                    <p class="text-center">Superhero</p>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="theme-preview bg-dark" data-theme="dark" onclick="changeTheme('dark')"></div>
+                    <p class="text-center">Littera</p>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="theme-preview bg-success" data-theme="success" onclick="changeTheme('success')"></div>
+                    <p class="text-center">Morph</p>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="theme-preview bg-info" data-theme="info" onclick="changeTheme('info')"></div>
+                    <p class="text-center">Minty</p>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="theme-preview bg-warning" data-theme="warning" onclick="changeTheme('warning')"></div>
+                    <p class="text-center">Solar</p>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="theme-preview bg-danger" data-theme="danger" onclick="changeTheme('danger')"></div>
+                    <p class="text-center">United</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="randomTheme()">Thème Aléatoire</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Notre Équipe</h2>
+            <div class="row">
+                <div class="col-md-4 team-member">
+                    <div class="member-avatar">Lys</div>
+                    <h3>ATCHAOUE Jordy Lys</h3>
+                    <p class="text-muted">Développeur Web</p>
+                    <p>Menu contextuel , Gestion des fichiers , Actualisation de l'affichage</p>
+                </div>
+                <div class="col-md-4 team-member">
+                    <div class="member-avatar">Sos</div>
+                    <h3>ADOUNSA Sosthène</h3>
+                    <p class="text-muted">Developpeur Web </p>
+                    <p>Fenetre principale , Filtrage des fichiers , utilistaires de themes</p>
+                </div>
+                <div class="col-md-4 team-member">
+                    <div class="member-avatar">LV</div>
+                    <h3>GBEHOU Louis-Victorien</h3>
+                    <p class="text-muted">Développeur Web</p>
+                    <p>Liste dynamique de fichiers , themes ,icones </p>
+                </div>
+                <div class="col-md-6 team-member">
+                    <div class="member-avatar">TD</div>
+                    <h3>HOUNZA Yann</h3>
+                    <p class="text-muted">Developpeur Web </p>
+                    <p>Barre d'addresse ,Gestion de la  navigation , Informations sur les fichiers </p>
+                </div>
+                <div class="col-md-6 team-member">
+                    <div class="member-avatar">AK</div>
+                    <h3>AHIVODJI Kenneth</h3>
+                    <p class="text-muted">Developpeur Web</p>
+                    <p>Fonction de Recherche de fichiers , Gestion des favoris , Gestion des erreurs  </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demos Section -->
+    <section id="demos" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Démonstrations Vidéo</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="video-container">
+                        <iframe src="videos\v1.mp4" allowfullscreen></iframe>
+                    </div>
+                    <h4>Navigation et Thèmes</h4>
+                    <p>Démonstration de la navigation entre dossiers et changement de thème visuel</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="video-container">
+                        <iframe src="videos\v2.mp4" allowfullscreen></iframe>
+                    </div>
+                    <h4>Gestion des Favoris</h4>
+                    <p>Comment marquer des éléments comme favoris et y accéder rapidement</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="video-container">
+                        <iframe src="videos\v3.mp4" allowfullscreen></iframe>
+                    </div>
+                    <h4>Recherche et Filtres</h4>
+                    <p>Utilisation de la fonction de recherche et filtrage par type de fichier</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="video-container">
+                        <iframe src="videos\v4.mp4" allowfullscreen></iframe>
+                    </div>
+                    <h4>Actions Contextuelles</h4>
+                    <p>Menu clic droit avec toutes les opérations disponibles</p>
+                </div>
+               
+                <div class="col-12">
+                    <div class="video-container">
+                        <iframe src="videos\v5.mp4" allowfullscreen></iframe>
+                    </div>
+                    <h4>Fonctionnalités Avancées</h4>
+                    <p>Démonstration complète de toutes les fonctionnalités</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Technologies Utilisées</h2>
+            <div class="tech-stack d-flex justify-content-center flex-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tkinter/tkinter-original.svg" alt="Tkinter" title="Tkinter">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="ttkbootstrap" title="ttkbootstrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" title="Git">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" title="GitHub">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <h3>Explorateur de Fichiers Tkinter</h3>
+            <p class="mb-4">Projet final de programmation évènementielle</p>
+            <p class="mb-0">© 2023 Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Changement de thème visuel pour la démo
+        function changeTheme(theme) {
+            document.querySelectorAll('.theme-preview').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelector(`.theme-preview[data-theme="${theme}"]`).classList.add('active');
+            
+            // Animation de feedback
+            const hero = document.querySelector('.hero');
+            hero.style.transition = 'background 0.5s ease';
+            
+            if (theme === 'dark') {
+                hero.style.background = 'linear-gradient(135deg, #1a1a1a, #333)';
+            } else if (theme === 'success') {
+                hero.style.background = 'linear-gradient(135deg, #2e7d32, #4caf50)';
+            } else if (theme === 'info') {
+                hero.style.background = 'linear-gradient(135deg, #1565c0, #42a5f5)';
+            } else if (theme === 'warning') {
+                hero.style.background = 'linear-gradient(135deg, #e65100, #fb8c00)';
+            } else if (theme === 'danger') {
+                hero.style.background = 'linear-gradient(135deg, #c62828, #ef5350)';
+            } else {
+                hero.style.background = 'linear-gradient(135deg, var(--secondary-color), var(--primary-color))';
+            }
+        }
+        
+        function randomTheme() {
+            const themes = ['primary', 'dark', 'success', 'info', 'warning', 'danger'];
+            const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+            changeTheme(randomTheme);
+        }
+        
+        // Smooth scrolling pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
